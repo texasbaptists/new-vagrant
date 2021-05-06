@@ -13,22 +13,28 @@ This project creates a virtual machine at the IP address `192.168.33.11`. If you
 
 This project uses the domain `sandbox.test`. If you want to use another domain replace all instances of `sandbox.test` with the desired domain in the instructions below. 
 
-### 1. Add to `etc/hosts`
+### 1. Click `Use this template` and create a new project repo
+
+### 2. Clone your new project to your local computer.
+
+```
+git clone [github URL] [local directory name]
+```
+
+### 3. Add to `etc/hosts`
 ```
 192.168.33.11 sandbox.test
 ```
 
-
-### 2. Provision Vagrant
+### 4. Provision Vagrant
 
 ```
 vagrant up
 ```
 
+### 5. Include a submodule site repo. (optional)
 
-### 3. Include a submodule site repo. (optional)
-
-Setting up a new project as a git submodule is advisable if you plan on deploying the site to another environment. 
+Setting up a new project as a git submodule is advised if you plan on deploying the site to another environment. 
 
 ```
 git submodule add [github URL] sandbox.test
@@ -37,7 +43,7 @@ git submodule add [github URL] sandbox.test
 You can make a new site repo from this template:
 * https://github.com/texasbaptists/new-local-dev
 
-### 4. SSH into the Vagrant server and configure the domain for nginx
+### 6. SSH into the Vagrant server and configure the domain for nginx
 
 ```
 vagrant ssh
