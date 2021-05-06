@@ -9,11 +9,13 @@ This template sets up a Vagrant virtual machine with the following installed:
 * composer
 * NPM
 
+There is no “scaffolding” for the web project, only the local environment. See step 7.
+
 This project creates a virtual machine at the IP address `192.168.33.11`. If you want to use another IP address, update the `etc/hosts` file and `Vagrantfile` before running `vagrant up`.
 
 This project uses the domain `sandbox.test`. If you want to use another domain replace all instances of `sandbox.test` with the desired domain in the instructions below. 
 
-### 1. Click `Use this template` and create a new project repo
+### 1. Click `Use this template` and create a new project git repo
 
 ### 2. Clone your new project to your local computer.
 
@@ -26,16 +28,24 @@ git clone [github URL] [local directory name]
 192.168.33.11 sandbox.test
 ```
 
-### 4. Provision Vagrant
+### 4. Install VirtualBox and Vagrant
+* https://www.virtualbox.org/
+* https://www.vagrantup.com/
 
+### 5. Add the Ubuntu vagrant box to your computer.
+```
+vagrant box add ubuntu/groovy64
+```
+
+
+### 6. Provision Vagrant
 ```
 vagrant up
 ```
 
-### 5. Include a submodule site repo. (optional)
+### 7. Include a submodule site repo. (optional)
 
-Setting up a new project as a git submodule is advised if you plan on deploying the site to another environment. 
-
+If you already have a working project, you can include it as a submodule. If you are creating a new web project that will be deployed to another environment, you should create that git repo first and include it as a submodule.
 ```
 git submodule add [github URL] sandbox.test
 ```
@@ -43,12 +53,13 @@ git submodule add [github URL] sandbox.test
 You can make a new site repo from this template:
 * https://github.com/texasbaptists/new-local-dev
 
-### 6. SSH into the Vagrant server and configure the domain for nginx
+### 8. SSH into the Vagrant server and configure the domain for nginx
 
 ```
 vagrant ssh
 sudo /var/www/site-config sandbox.test
 exit
+
 ```
 
 Notes: 
