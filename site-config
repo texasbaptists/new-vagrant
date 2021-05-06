@@ -1,0 +1,72 @@
+#!/bin/bash
+#
+# usage: sudo ./site-config www.domain.test
+# Creates the folder to put your site in, creates a nginx config,
+# links it, and restarts nginx
+#
+# - Your websites are stored in /var/www/ and each contain a public/ folder
+
+echo -e "Setting up $1 in nginx"
+
+DIRECTORY="/var/www/$1/public"
+
+if [ -d $DIRECTORY ]; then
+
+  echo -e "The $1 folder already exists."
+
+else
+
+  mkdir -p $DIRECTORY
+  echo -e "Making the $1 folder"
+
+  echo -e "Making a test index.php"
+  echo "$1 is currently under maintenance" > "$DIRECTORY/index.php"
+
+fi
+
+if [ -f /etc/nginx/sites-available/$1 ]; then
+  echo -e "Removing the old config file for $1."
+  rm /etc/nginx/sites-available/$1
+fi
+
+  echo -e "Creating the sites-available file for $1."
+  sudo cat <<'EOF' >> /etc/nginx/sites-available/$1
+server {
+        listen 80;
+        listen [::]:80;
+        server_name SITE;
+
+        root /var/www/SITE/public;
+        index index.php index.html index.htm index.nginx-debian.html;
+
+        location = /favicon.ico { access_log off; log_not_found off; }
+        location = /robots.txt  { access_log off; log_not_found off; }
+
+        location / {
+            try_files $uri $uri/ /index.php?$query_string;
+        }
+
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+  }
+EOF
+
+sudo sed -i "s/SITE/$1/g" "/etc/nginx/sites-available/$1"
+
+if [ -f /etc/nginx/sites-enabled/$1 ]; then
+  echo -e "Removing the old sites-enabled file link for $1."
+  rm /etc/nginx/sites-enabled/$1
+fi
+
+echo -e "Linking $1 in sites-enabled."
+cd /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/$1
+
+echo -e "Restarting Nginx"
+service nginx restart

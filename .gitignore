@@ -1,0 +1,5 @@
+/sandbox.test/vendor/*
+/.vagrant/*
+.DS_Store
+.idea/*
+/sandbox.test/vendor/
