@@ -8,7 +8,7 @@
 
 echo -e "Setting up $1 in nginx"
 
-DIRECTORY="/var/www/$1/public"
+DIRECTORY="/var/www/$1/web"
 
 if [ -d $DIRECTORY ]; then
 
@@ -36,7 +36,7 @@ server {
         listen [::]:80;
         server_name SITE;
 
-        root /var/www/SITE/public;
+        root /var/www/SITE/web;
         index index.php index.html index.htm index.nginx-debian.html;
 
         location = /favicon.ico { access_log off; log_not_found off; }

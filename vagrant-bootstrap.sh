@@ -42,5 +42,3 @@ apt-get update -y -q
 apt-get upgrade -y -q
 
 echo 'Vagrant provisioning scripts are completed.'
-
-echo 'To configure sites use this command on server (vagrant ssh): sudo /var/www/site-config www.example.test'

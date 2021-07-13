@@ -15,6 +15,8 @@ This project creates a virtual machine at the IP address `192.168.33.11`. If you
 
 This project uses the domain `sandbox.test`. If you want to use another domain replace all instances of `sandbox.test` with the desired domain in the instructions below. 
 
+This project assumes you use `/web` as the root directory for each domain. If you use something else, update lines `11` and `39` in the `site-config` script. 
+
 ### 1. Click `Use this template` and create a new project git repo
 
 ### 2. Clone your new project to your local computer.
@@ -24,6 +26,7 @@ git clone [github URL] [local directory name]
 ```
 
 ### 3. Add to `etc/hosts`
+If you are using the default IP address and domain add:
 ```
 192.168.33.11 sandbox.test
 ```
@@ -37,8 +40,10 @@ git clone [github URL] [local directory name]
 vagrant box add ubuntu/groovy64
 ```
 
-
 ### 6. Provision Vagrant
+Make any changes you need to `Vagrantfile`, `vagrant-bootstrap.sh`, and `site-config`. 
+
+Then:
 ```
 vagrant up
 ```
