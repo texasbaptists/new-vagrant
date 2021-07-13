@@ -69,4 +69,4 @@ exit
 
 Notes: 
 * If no directory has been made for the domain, this script will create it with a default `index.php` file. 
-* The root of the domain will be to the `public` directory in the domain folder.
+* The root of the domain will be to the `web` directory in the domain folder.
